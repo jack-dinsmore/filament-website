@@ -1,10 +1,27 @@
 <html>
     <head>
+        <title>Dinsmore & Romani 2024</title>
         <style>
+            @font-face {
+                font-family: hershey;
+                src:url("AVHersheyComplexMedium.ttf");
+            }
             body {
                 display: flex;
+                flex-direction: column;
+                justify-content: center;  /* Centering y-axis */
+            }
+            .main {
+                display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items :center;
+            }
+            p {
+                text-align: center;
+                font-family: hershey;
+                font-size: 18;
+                padding-left: 150px;
+                padding-right: 150px;
             }
         </style>
     </head>
@@ -18,8 +35,8 @@
 "J1509-5850:(347$^\circ$)":	[0.3282,	0.1015,	2.1e+01],
 "J0357+3205":	[0.5436,	0.3726,	1.7e+01],
 "J1227-4853":	[0.5195,	0.3618,	1e+01],
-"J2055+2539:(184$^\circ$)":	[0.3757,	0.03277,	1.6e+01],
-"J2055+2539:(343$^\circ$)":	[0.2673,	0.06268,	1.6e+01],
+"J2055+2539:(184$^\circ$)":	[0.3757,	0.06268,	1.6e+01],
+"J2055+2539:(343$^\circ$)":	[0.2673,	0.03277,	1.6e+01],
 "J1809-2332":	[0.5111,	0.5416,	1.1e+01],
 "J0855-4644":	[0.5032,	0.528,	1.4e+01],
 "Guitar":	[0.4936,	0.1736,	2.3e+01],
@@ -44,7 +61,7 @@
 "J1531-5610":	[0.1484,	0.3295,	7.4],
 "J1954+2836":	[0.1372,	0.165,	5.7],
 "J1308+2127":	[0.1337,	0.3963,	1.8e+01],
-"Cannonball":	[0.1281,	0.06946,	1.2e+01],
+"Cannonball":	[0.1281,	0.04015,	1.2e+01],
 "J1412-6145":	[0.1258,	0.3194,	5.5],
 "J1836+5925":	[0.1255,	0.3709,	1.7e+01],
 "J1611-5847":	[0.1227,	0.06386,	2.9],
@@ -197,7 +214,7 @@
                 for (var key in POSITIONS) {
                     let fracX = POSITIONS[key][0];
                     let fracY = 1. - POSITIONS[key][1];
-                    let radius = POSITIONS[key][2] / 1400.;
+                    let radius = Math.max(POSITIONS[key][2] / 1400., 0.01);
                     if (((plotXFrac - fracX)/aspect)**(2) + (plotYFrac - fracY)**(2) < radius**(2)) {
                         let path = key.split(':')[0];
                         if (key != up) {
@@ -210,7 +227,16 @@
             });
         </script>
 
-        <img src="ensemble-age.png" width="60%" id="plot">
-        <img width="30%" id="zoom">
+        <figure>
+            <div class="main">
+                <img src="ensemble-age.png" width="60%" id="plot">
+                <img width="30%" id="zoom">
+            </div>
+            <figcaption>
+                <p><b>Figure 3:</b> <i>Left</i>: (from Dinsmore & Romani (2024)) Hover over points to see the individual <i>Chandra</i> X-ray Observatory observations. Blue ribbons show sigma as a function of angle, and orange show delta. Point sources have been heavily cleaned; this carves chunks out of the bright filaments but leaves the fainter filaments untouched (suitable behavior for a search). Black arrows with gray error bars show proper motion uncertainties, if known.</p>
+
+                <p>The five known filaments are detected (blue), together with many pulsar wind nebula (PWN) trails (dark brown) and a handful of non-trail nebulae (light brown). The three orange points indicate pulsars with evidence of filaments. Purple represent newly searched observations. See the paper for more information.</p>
+            </figcaption>
+        </figure>
     </body>
 </html>
